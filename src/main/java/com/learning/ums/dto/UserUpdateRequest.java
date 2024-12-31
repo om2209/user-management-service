@@ -2,7 +2,6 @@ package com.learning.ums.dto;
 
 import lombok.Data;
 
-
 @Data
 public class UserUpdateRequest {
 

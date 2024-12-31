@@ -1,12 +1,9 @@
 package com.learning.ums.controller;
 
 import com.learning.ums.dto.*;
-import com.learning.ums.entity.User;
 import com.learning.ums.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
