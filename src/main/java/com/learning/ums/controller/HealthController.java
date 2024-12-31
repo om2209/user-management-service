@@ -22,7 +22,7 @@ public class HealthController {
         serviceStartTime = Instant.now();
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ServiceHealthResponse> getServiceHealth() {
 
         ServiceHealthResponse serviceHealthResponse = new ServiceHealthResponse(

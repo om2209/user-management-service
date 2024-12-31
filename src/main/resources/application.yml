@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: user-management-service
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+server:
+  port: 8081
+  servlet:
+    context-path: /ums
+security:
+  x-api-key: ${X_API_KEY}
+  content-type: application/json
