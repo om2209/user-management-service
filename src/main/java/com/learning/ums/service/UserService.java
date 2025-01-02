@@ -2,7 +2,10 @@ package com.learning.ums.service;
 
 import com.learning.ums.dto.*;
 import com.learning.ums.entity.User;
+import com.learning.ums.enumerator.DeletionStrategy;
 import com.learning.ums.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -115,5 +118,29 @@ public class UserService {
         if (value != null) {
             setter.accept(value);
         }
+    }
+
+    public UserDeletionResponse deleteUser(Long userId, DeletionStrategy deletionStrategy) throws BadRequestException {
+
+        User affectedUser = userRepository.findById(userId).
+                orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        if (deletionStrategy == null) {
+            throw new BadRequestException("Please specify a deletion strategy");
+        }
+
+        if (!affectedUser.getIsActive()) {
+            throw new BadRequestException("This user is already deleted");
+        }
+
+        if (deletionStrategy.equals(DeletionStrategy.SOFT)) {
+            affectedUser.setIsActive(false);
+            affectedUser.setUpdatedAt(LocalDateTime.now());
+            userRepository.save(affectedUser);
+        } else {
+            userRepository.delete(affectedUser);
+        }
+
+        return new UserDeletionResponse("success", buildUserResponse(affectedUser));
     }
 }

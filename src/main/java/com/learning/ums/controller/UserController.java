@@ -1,7 +1,11 @@
 package com.learning.ums.controller;
 
 import com.learning.ums.dto.*;
+import com.learning.ums.enumerator.DeletionStrategy;
 import com.learning.ums.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.BadRequestException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +36,17 @@ public class UserController {
                                                            @RequestBody UserUpdateRequest userUpdateRequest) {
 
         return ResponseEntity.ok(userService.updateUser(userId, userUpdateRequest));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<UserDeletionResponse> deleteUser(@PathVariable Long userId, @RequestParam("strategy")DeletionStrategy deletionStrategy) {
+
+        try {
+            return ResponseEntity.ok(userService.deleteUser(userId, deletionStrategy));
+        } catch (BadRequestException e) {
+            return new ResponseEntity<>(new UserDeletionResponse(e.getMessage(), null), HttpStatus.BAD_REQUEST);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(new UserDeletionResponse(e.getMessage(), null), HttpStatus.NOT_FOUND);
+        }
     }
 }
