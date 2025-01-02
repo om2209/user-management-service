@@ -1,6 +1,5 @@
 package com.learning.ums.dto;
 
-import com.learning.ums.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

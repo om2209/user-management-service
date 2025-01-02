@@ -3,7 +3,7 @@ package com.learning.ums.dto;
 import lombok.Data;
 
 @Data
-public class UserCreationRequest {
+public class UserUpdateRequest {
 
     private String userName;
     private String email;
@@ -14,4 +14,7 @@ public class UserCreationRequest {
     private String bio;
     private String location;
     private String website;
+    private Boolean isVerified;
+    private Boolean isActive;
+    private Boolean isPrivate;
 }

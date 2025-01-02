@@ -1,15 +1,9 @@
 package com.learning.ums.controller;
 
-import com.learning.ums.dto.UserCreationRequest;
-import com.learning.ums.dto.UserCreationResponse;
-import com.learning.ums.dto.UserResponse;
-import com.learning.ums.dto.UsersResponse;
-import com.learning.ums.entity.User;
+import com.learning.ums.dto.*;
 import com.learning.ums.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -31,5 +25,12 @@ public class UserController {
     public ResponseEntity<UserCreationResponse> createUser(@RequestBody UserCreationRequest userCreationRequest) {
 
         return ResponseEntity.ok(userService.createUser(userCreationRequest));
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserCreationResponse> updateUser(@PathVariable Long userId,
+                                                           @RequestBody UserUpdateRequest userUpdateRequest) {
+
+        return ResponseEntity.ok(userService.updateUser(userId, userUpdateRequest));
     }
 }

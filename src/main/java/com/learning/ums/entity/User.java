@@ -60,11 +60,11 @@ public class User {
     }
 
     @Column(name = "is_verified", nullable = false)
-    private boolean isVerified;
+    private Boolean isVerified;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private Boolean isActive;
 
     @Column(name = "is_private", nullable = false)
-    private boolean isPrivate;
+    private Boolean isPrivate;
 }
