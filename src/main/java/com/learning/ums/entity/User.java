@@ -26,6 +26,12 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
+    @Column(name = "country_code")
+    private String countryCode;
+
+    @Column(name = "mobile_number", length = 10, unique = true)
+    private String mobileNumber;
+
     @Column(name = "display_name", nullable = false)
     private String displayName;
 
@@ -36,7 +42,10 @@ public class User {
     private String coverPictureUrl;
 
     private String bio;
-    private String location;
+
+    @Column(name = "current_location")
+    private String currentLocation;
+
     private String website;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -14,7 +14,7 @@ public class UserResponse {
     private String name;
     private String email;
     private String bio;
-    private String location;
+    private String currentLocation;
     private String website;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

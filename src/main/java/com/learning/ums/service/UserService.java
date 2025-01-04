@@ -46,7 +46,7 @@ public class UserService {
                 email(user.getEmail()).
                 name(user.getDisplayName()).
                 bio(user.getBio()).
-                location(user.getLocation()).
+                currentLocation(user.getCurrentLocation()).
                 website(user.getWebsite()).
                 createdAt(user.getCreatedAt()).
                 updatedAt(user.getUpdatedAt()).
@@ -68,11 +68,13 @@ public class UserService {
                 userName(userCreationRequest.getUserName()).
                 email(userCreationRequest.getEmail()).
                 passwordHash(passwordEncoder.encode(userCreationRequest.getPassword())).
+                countryCode(userCreationRequest.getCountryCode()).
+                mobileNumber(userCreationRequest.getMobileNumber()).
                 displayName(userCreationRequest.getDisplayName()).
                 profilePictureUrl(userCreationRequest.getProfilePictureUrl()).
                 coverPictureUrl(userCreationRequest.getCoverPictureUrl()).
                 bio(userCreationRequest.getBio()).
-                location(userCreationRequest.getLocation()).
+                currentLocation(userCreationRequest.getCurrentLocation()).
                 website(userCreationRequest.getWebsite()).
                 isActive(true).
                 isVerified(false).
@@ -101,10 +103,12 @@ public class UserService {
         updateIfPresent(() -> userUpdateRequest.getPassword() != null ?
                         passwordEncoder.encode(userUpdateRequest.getPassword()) : null,
                 user::setPasswordHash);
+        updateIfPresent(userUpdateRequest::getCountryCode, user::setCountryCode);
+        updateIfPresent(userUpdateRequest::getMobileNumber, user::setMobileNumber);
         updateIfPresent(userUpdateRequest::getProfilePictureUrl, user::setProfilePictureUrl);
         updateIfPresent(userUpdateRequest::getCoverPictureUrl, user::setCoverPictureUrl);
         updateIfPresent(userUpdateRequest::getBio, user::setBio);
-        updateIfPresent(userUpdateRequest::getLocation, user::setLocation);
+        updateIfPresent(userUpdateRequest::getCurrentLocation, user::setCurrentLocation);
         updateIfPresent(userUpdateRequest::getWebsite, user::setWebsite);
         updateIfPresent(userUpdateRequest::getIsVerified, user::setIsVerified);
         updateIfPresent(userUpdateRequest::getIsActive, user::setIsActive);
